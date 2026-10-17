@@ -1,0 +1,22 @@
+
+services:
+  mottu-api:
+    build:
+      context: ./Mottu.Fleet.Api
+      dockerfile: Dockerfile
+    container_name: mottu-api
+    ports:
+      - "5272:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ConnectionStrings__DefaultConnection=DataSource=/data/mottu.db
+      - Jwt__Key=mottu-fleet-api-super-secret-key-2026-fire-blast-tech-1234567890
+      - Jwt__Issuer=Mottu.Fleet.Api
+      - Jwt__Audience=Mottu.Fleet.Clients
+      - Jwt__ExpiresInMinutes=60
+    volumes:
+      - mottu-data:/data
+    restart: unless-stopped
+
+volumes:
+  mottu-data:
