@@ -156,6 +156,7 @@ app.UseSwaggerUI(c =>
 {
     c.SwaggerEndpoint("/swagger/v1/swagger.json", "Mottu Fleet API v1");
     c.SwaggerEndpoint("/swagger/v2/swagger.json", "Mottu Fleet API v2");
+    c.RoutePrefix = string.Empty; // Carrega a UI do Swagger diretamente na raiz (/)
 });
 
 app.UseMiddleware<ExceptionHandlingMiddleware>();
@@ -165,7 +166,10 @@ app.UseRateLimiter();
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.UseHttpsRedirection();
+if (!app.Environment.IsProduction())
+{
+    app.UseHttpsRedirection();
+}
 app.MapControllers();
 
 app.MapHealthChecks("/health");
