@@ -2,12 +2,37 @@
 
 API REST para gestão de frotas de motos elétricas — desenvolvida em **.NET 8** com **Clean Architecture**, **CQRS/MediatR**, autenticação **JWT**, versionamento de API e containerização com Docker.
 
+![.NET](https://img.shields.io/badge/.NET-8.0-512BD4?logo=dotnet&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-Multi--stage-2496ED?logo=docker&logoColor=white)
+![Render](https://img.shields.io/badge/Deploy-Render-46E3B7?logo=render&logoColor=black)
+![License](https://img.shields.io/badge/Licença-MIT-green)
+
 > Projeto de portfólio profissional. Demonstra domínio de arquitetura limpa, padrões de projeto e boas práticas de engenharia back-end.
+
+---
+
+## 🌐 Demonstração Online (Live Demo)
+
+Teste a API diretamente no navegador, sem precisar configurar nada localmente:
+
+**🔗 https://mottu-fleet-api.onrender.com/**
+
+- A **interface Swagger interativa** carrega automaticamente na **raiz (`/`)** — basta acessar o link acima.
+- Roda em produção no **Render**, a partir do container Docker (build multi-stage).
+- A documentação é **pública** para facilitar a avaliação, mas os endpoints de motos seguem protegidos por **JWT**.
+
+Fluxo rápido de teste na demo:
+
+1. Acesse `https://mottu-fleet-api.onrender.com/` (Swagger abre na raiz).
+2. Faça login via `POST /api/auth/login` para obter o token.
+3. Clique em **Authorize** no Swagger e informe `Bearer <seu-token>`.
+4. Explore os endpoints `/api/v1/motos` e `/api/v2/motos`.
 
 ---
 
 ## 📌 Sumário
 
+- [Demonstração Online (Live Demo)](#-demonstração-online-live-demo)
 - [Visão Geral](#-visão-geral)
 - [Stack Tecnológica](#-stack-tecnológica)
 - [Arquitetura](#-arquitetura)
@@ -134,11 +159,13 @@ dotnet restore
 dotnet run
 ```
 
-A API sobe por padrão em `http://localhost:5272` e o Swagger em:
+A API sobe por padrão em `http://localhost:5272`. Com o `RoutePrefix` do Swagger configurado como vazio, a documentação interativa carrega **diretamente na raiz**:
 
 ```
-http://localhost:5272/swagger
+http://localhost:5272/
 ```
+
+> Os JSONs do OpenAPI continuam disponíveis em `/swagger/v1/swagger.json` e `/swagger/v2/swagger.json`.
 
 ### Banco de dados
 
